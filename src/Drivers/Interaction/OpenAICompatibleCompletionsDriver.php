@@ -70,7 +70,7 @@ class OpenAICompatibleCompletionsDriver extends ModelCompletionsDriver
                                         'type' => 'function',
                                         'function' => [
                                             'name' => $message->name,
-                                            'arguments' => json_encode($message->args)
+                                            'arguments' =>json_encode(empty($message->args) ? new \stdClass() : $message->args)
                                         ]
                                     ], $message->tool_calls)
                                 ];
@@ -117,7 +117,10 @@ class OpenAICompatibleCompletionsDriver extends ModelCompletionsDriver
                     'function' => [
                         'name' => $tool_definition['name'],
                         'description' => $tool_definition['description'],
-                        'parameters' => $tool_definition['inputSchema'],
+                        'parameters' => array_map(function(array $schema) use($tool_definition) {
+                            if(empty($schema['properties'])) $schema['properties'] = new \stdClass();
+                            return $schema;
+                        }, [$tool_definition['inputSchema']])[0],
                     ]
                 ], $neural_model->getTools());
             }
@@ -130,7 +133,7 @@ class OpenAICompatibleCompletionsDriver extends ModelCompletionsDriver
 
     protected function generateCompletion(array $output): array
     {
-        //dd($output);
+
         $results = [
             'id'  => $output['id'],
             'usage' => $output['usage'],

@@ -2,7 +2,7 @@
     "name": "llm-speak/open-ai-compatible",
     "description": "A Laravel package for integrating OpenAI's language models and services",
     "type": "library",
-    "version": "0.8.0",
+    "version": "0.8.1",
     "license": "MIT",
     "authors": [
         {
