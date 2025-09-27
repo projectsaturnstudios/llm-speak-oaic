@@ -1,0 +1,57 @@
+{
+    "name": "llm-speak/open-ai-compatible",
+    "description": "A Laravel package for integrating OpenAI's language models and services",
+    "type": "library",
+    "version": "0.8.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Project Saturn Studios, LLC",
+            "email": "info@projectsaturnstudios.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "ext-json": "*",
+        "llm-speak/core": "^0.8.0",
+        "spatie/laravel-data": "^4.11",
+        "lorisleiva/laravel-actions": "^2.6",
+        "projectsaturnstudios/laravel-design-patterns": "^0.1.0"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.0",
+        "orchestra/testbench": "^10.0",
+        "mockery/mockery": "^1.6"
+    },
+    "autoload":{
+        "psr-4": {
+            "LLMSpeak\\OpenAICompatible\\": "src/"
+        }
+    },
+    "autoload-dev":{
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LLMSpeak\\OpenAICompatible\\Providers\\LLMSpeakOpenAICompatibleServiceProvider"
+            ]
+        }
+
+    },
+    "scripts": {
+        "test": "XDEBUG_MODE=coverage pest",
+        "test-coverage": "XDEBUG_MODE=coverage pest --coverage",
+        "test-coverage-html": "XDEBUG_MODE=coverage pest --coverage --coverage-html=tests/coverage",
+        "test-coverage-text": "XDEBUG_MODE=coverage pest --coverage --coverage-text",
+        "test-coverage-clover": "XDEBUG_MODE=coverage pest --coverage --coverage-clover=tests/coverage.xml"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
