@@ -124,6 +124,15 @@ class OpenAICompatibleCompletionsDriver extends ModelCompletionsDriver
                     ]
                 ], $neural_model->getTools());
             }
+            if(!empty($neural_model->outputFormat()))
+            {
+                $results['response_format'] = [
+                    'type' => 'json_schema',
+                    'json_schema' => [
+                        'schema' => $neural_model->outputFormat()
+                    ]
+                ];
+            }
 
             $original = $neural_model->getOriginal();
             // @todo - apply non-standard options from original
